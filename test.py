@@ -29,3 +29,12 @@ print("###### Without drop the decimal point ########")
 print(3/2)
 
 print(name+'s')
+
+
+print("########Dictionaries########")
+
+new_dic = {'name':'test','agee':43,'courses':['kjdksjfs','safsfwefwef']}
+print(new_dic)
+
+print("######## Default value if item not present in dic ########:")
+print(new_dic.get('phone','Not found'))

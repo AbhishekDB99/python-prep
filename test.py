@@ -41,3 +41,5 @@ print(new_dic.get('phone','Not found'))
 
 if True:
     print('Testing true condition')
+
+print("Testing new rule")

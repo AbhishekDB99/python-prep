@@ -38,3 +38,6 @@ print(new_dic)
 
 print("######## Default value if item not present in dic ########:")
 print(new_dic.get('phone','Not found'))
+
+if True:
+    print('Testing true condition')

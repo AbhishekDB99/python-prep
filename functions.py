@@ -1,3 +1,5 @@
+import test_module as tm
+
 def func_test():
     print('test')
 
@@ -27,3 +29,10 @@ def test4(*a,**b):
         print(key,value)
 
 test4(6,7,8,9,r=2,y=5)
+
+def test5():
+    return 'hello'
+
+print(test5())
+
+print(tm.test_module_func())

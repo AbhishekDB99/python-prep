@@ -1,0 +1,186 @@
+import pandas as pd
+
+# Expanded data with detailed questions classified by difficulty level
+expanded_data = {
+    "Sr No": list(range(1, 51)),
+    "Question": [
+        # IP Addresses
+        "What is an IP address? (Easy)",
+        "What is the difference between IPv4 and IPv6? (Easy)",
+        "What is a private IP address? (Easy)",
+        "How are IP addresses assigned to devices? (Medium)",
+        "What is a subnet mask and how is it used? (Medium)",
+        "How does NAT (Network Address Translation) work? (Medium)",
+        "Explain the structure of an IPv6 address. (Advanced)",
+        "What are the different classes of IP addresses? (Advanced)",
+        "How does CIDR (Classless Inter-Domain Routing) work? (Advanced)",
+        "What is the purpose of loopback addresses? (Advanced)",
+        # DNS
+        "What does DNS stand for and what is its purpose? (Easy)",
+        "What is a domain name? (Easy)",
+        "What is an A record in DNS? (Easy)",
+        "How does DNS resolve a domain name to an IP address? (Medium)",
+        "What is a CNAME record and how is it used? (Medium)",
+        "What are the differences between primary and secondary DNS servers? (Medium)",
+        "What are DNS zones and how do they work? (Advanced)",
+        "Explain the concept of DNS caching. (Advanced)",
+        "What are DNS root servers? (Advanced)",
+        "How does DNSSEC improve DNS security? (Advanced)",
+        # Subnets
+        "What is a subnet? (Easy)",
+        "Why do we use subnets? (Easy)",
+        "What is a subnet mask? (Easy)",
+        "How do you calculate the number of hosts in a subnet? (Medium)",
+        "What is the difference between a public and private subnet? (Medium)",
+        "How do subnets improve network performance? (Medium)",
+        "What is VLSM (Variable Length Subnet Masking)? (Advanced)",
+        "How do you design a subnetting plan for a large network? (Advanced)",
+        "Explain the concept of subnetting and supernetting. (Advanced)",
+        "What are the challenges of subnetting in IPv6? (Advanced)",
+        # Routing
+        "What is routing? (Easy)",
+        "What is a router? (Easy)",
+        "What is the difference between static and dynamic routing? (Easy)",
+        "What is a routing table and how does it work? (Medium)",
+        "What are routing protocols? (Medium)",
+        "How does OSPF (Open Shortest Path First) work? (Medium)",
+        "What is BGP (Border Gateway Protocol) and how is it used? (Advanced)",
+        "Explain the concept of route aggregation. (Advanced)",
+        "What are the differences between interior and exterior gateway protocols? (Advanced)",
+        "How does MPLS (Multiprotocol Label Switching) improve routing efficiency? (Advanced)",
+        # TCP/IP and OSI Models
+        "What are the layers of the TCP/IP model? (Easy)",
+        "What are the layers of the OSI model? (Easy)",
+        "What is the purpose of the Transport layer in TCP/IP? (Easy)",
+        "How do the layers of the TCP/IP model interact? (Medium)",
+        "What are the differences between TCP and UDP? (Medium)",
+        "How does the Network layer in OSI differ from the Internet layer in TCP/IP? (Medium)",
+        "Explain the encapsulation process in the OSI model. (Advanced)",
+        "How does the Presentation layer of the OSI model work? (Advanced)",
+        "What are the challenges of using the OSI model in real-world networking? (Advanced)",
+        "How does the Application layer in both models support network communication? (Advanced)"
+    ],
+    "Answer": [
+        # IP Addresses
+        "An IP address is a unique identifier assigned to each device on a network.",
+        "IPv4 uses 32-bit addresses, while IPv6 uses 128-bit addresses.",
+        "A private IP address is used within a private network and not routable on the internet.",
+        "IP addresses are assigned by DHCP or manually by network administrators.",
+        "A subnet mask separates the network and host portions of an IP address.",
+        "NAT translates private IP addresses to a public IP address for internet access.",
+        "An IPv6 address consists of eight groups of four hexadecimal digits.",
+        "IP addresses are categorized into five classes: A, B, C, D, and E.",
+        "CIDR allows for more flexible IP address allocation by eliminating fixed address classes.",
+        "Loopback addresses (e.g., 127.0.0.1) are used for testing and diagnostics.",
+        # DNS
+        "DNS stands for Domain Name System, translating domain names into IP addresses.",
+        "A domain name is a human-readable address for a website (e.g., www.example.com).",
+        "An A record maps a domain name to its corresponding IPv4 address.",
+        "DNS resolves domain names by querying a series of DNS servers.",
+        "A CNAME record is an alias that points to another domain name.",
+        "Primary DNS servers hold the original zone data, while secondary servers hold copies.",
+        "DNS zones are administrative spaces within the DNS structure.",
+        "DNS caching stores DNS query results to speed up future requests.",
+        "DNS root servers are the top of the DNS hierarchy.",
+        "DNSSEC adds a layer of security to DNS by enabling data origin authentication.",
+        # Subnets
+        "A subnet is a subdivision of an IP network.",
+        "Subnets organize and improve network efficiency.",
+        "A subnet mask defines the network and host portions of an IP address.",
+        "The number of hosts is calculated using 2^(32 - subnet bits) - 2 for IPv4.",
+        "Public subnets are accessible from the internet, while private subnets are not.",
+        "Subnets reduce broadcast traffic and improve performance.",
+        "VLSM allows subnets of different sizes within the same network.",
+        "Designing a subnetting plan involves calculating the required number of subnets and hosts.",
+        "Subnetting divides a network into smaller networks, while supernetting combines them.",
+        "Subnetting in IPv6 involves understanding prefix lengths and address allocations.",
+        # Routing
+        "Routing is the process of selecting paths in a network to send data packets.",
+        "A router is a device that forwards data packets between computer networks.",
+        "Static routing uses fixed paths, while dynamic routing adjusts to network changes.",
+        "A routing table lists the routes to particular network destinations.",
+        "Routing protocols determine the best path for data to travel.",
+        "OSPF is a link-state routing protocol used within an autonomous system.",
+        "BGP is used to exchange routing information between different networks.",
+        "Route aggregation reduces the size of routing tables by combining routes.",
+        "Interior gateway protocols operate within an autonomous system, while exterior gateway protocols operate between them.",
+        "MPLS directs data from one node to the next based on short path labels.",
+        # TCP/IP and OSI Models
+        "The TCP/IP model has four layers: Application, Transport, Internet, Network Access.",
+        "The OSI model has seven layers: Physical, Data Link, Network, Transport, Session, Presentation, Application.",
+        "The Transport layer ensures reliable data transfer between devices.",
+        "The layers of the TCP/IP model interact through encapsulation and decapsulation.",
+        "TCP is connection-oriented, while UDP is connectionless.",
+        "The OSI Network layer handles routing, while the TCP/IP Internet layer handles logical addressing.",
+        "Encapsulation wraps data with protocol information at each OSI layer.",
+        "The Presentation layer formats data for the application layer and handles encryption.",
+        "The OSI model's complexity can make it difficult to implement in real-world scenarios.",
+        "The Application layer provides protocols for network services to applications."
+    ],
+    "Comments/Links": [
+        # IP Addresses
+        "More details: https://en.wikipedia.org/wiki/IP_address",
+        "More details: https://en.wikipedia.org/wiki/IPv4, https://en.wikipedia.org/wiki/IPv6",
+        "More details: https://en.wikipedia.org/wiki/Private_network",
+        "More details: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol",
+        "More details: https://en.wikipedia.org/wiki/Subnetwork",
+        "More details: https://en.wikipedia.org/wiki/Network_address_translation",
+        "More details: https://en.wikipedia.org/wiki/IPv6_address",
+        "More details: https://en.wikipedia.org/wiki/Classful_network",
+        "More details: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing",
+        "More details: https://en.wikipedia.org/wiki/Loopback",
+        # DNS
+        "More details: https://en.wikipedia.org/wiki/Domain_Name_System",
+        "More details: https://en.wikipedia.org/wiki/Domain_name",
+        "More details: https://en.wikipedia.org/wiki/List_of_DNS_record_types",
+        "More details: https://en.wikipedia.org/wiki/Domain_Name_System",
+        "More details: https://en.wikipedia.org/wiki/CNAME_record",
+        "More details: https://en.wikipedia.org/wiki/Primary_DNS_server",
+        "More details: https://en.wikipedia.org/wiki/Domain_Name_System",
+        "More details: https://en.wikipedia.org/wiki/Domain_Name_System",
+        "More details: https://en.wikipedia.org/wiki/Root_name_server",
+        "More details: https://en.wikipedia.org/wiki/Domain_Name_System_Security_Extensions",
+        # Subnets
+        "More details: https://en.wikipedia.org/wiki/Subnetwork",
+        "More details: https://en.wikipedia.org/wiki/Subnetwork",
+        "More details: https://en.wikipedia.org/wiki/Subnetwork",
+        "More details: https://en.wikipedia.org/wiki/Subnetwork",
+        "More details: https://en.wikipedia.org/wiki/Public_IP_address",
+        "More details: https://en.wikipedia.org/wiki/Subnetwork",
+        "More details: https://en.wikipedia.org/wiki/Variable_Length_Subnet_Masking",
+        "More details: https://en.wikipedia.org/wiki/Subnetwork",
+        "More details: https://en.wikipedia.org/wiki/Subnetwork",
+        "More details: https://en.wikipedia.org/wiki/IPv6_subnetting",
+        # Routing
+        "More details: https://en.wikipedia.org/wiki/Routing",
+        "More details: https://en.wikipedia.org/wiki/Router_(computing)",
+        "More details: https://en.wikipedia.org/wiki/Static_routing",
+        "More details: https://en.wikipedia.org/wiki/Routing_table",
+        "More details: https://en.wikipedia.org/wiki/Routing_protocol",
+        "More details: https://en.wikipedia.org/wiki/Open_Shortest_Path_First",
+        "More details: https://en.wikipedia.org/wiki/Border_Gateway_Protocol",
+        "More details: https://en.wikipedia.org/wiki/Route_aggregation",
+        "More details: https://en.wikipedia.org/wiki/Interior_gateway_protocol",
+        "More details: https://en.wikipedia.org/wiki/Multiprotocol_Label_Switching",
+        # TCP/IP and OSI Models
+        "More details: https://en.wikipedia.org/wiki/Internet_protocol_suite",
+        "More details: https://en.wikipedia.org/wiki/OSI_model",
+        "More details: https://en.wikipedia.org/wiki/Transport_layer",
+        "More details: https://en.wikipedia.org/wiki/Internet_protocol_suite",
+        "More details: https://en.wikipedia.org/wiki/User_Datagram_Protocol",
+        "More details: https://en.wikipedia.org/wiki/Network_layer",
+        "More details: https://en.wikipedia.org/wiki/Encapsulation_(networking)",
+        "More details: https://en.wikipedia.org/wiki/Presentation_layer",
+        "More details: https://en.wikipedia.org/wiki/OSI_model",
+        "More details: https://en.wikipedia.org/wiki/Application_layer"
+    ]
+}
+
+# Create DataFrame
+df = pd.DataFrame(expanded_data)
+
+# Save to Excel
+file_path = "AWS_Networking_Concepts_Expanded.xlsx"
+df.to_excel(file_path, index=False)
+
+file_path
